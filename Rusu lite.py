@@ -21,6 +21,7 @@ lbl1.place(x=150, y=20)
 lbl = Label(root2, bg="black")
 lbl.place(x=30, y=65)
 
+#IMAGE
 frm_image = Frame(root2, width=190, height=210, highlightbackground="orange", highlightthickness=1, bg="black")
 frm_image.place(x=655, y=300)
 browse_btn = Button(root2, text="BROWSE IMAGE", compound=CENTER, font=('Comic Sans MS', 10),  bg="orange", borderwidth=2)
