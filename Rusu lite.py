@@ -9,7 +9,7 @@ import mysql.connector
 import webbrowser
 
 
-mydb = mysql.connector.connect(
+mydb = mysql.connector.connect
        host = "127.0.0.1",
        user = "root",
        password = "",
