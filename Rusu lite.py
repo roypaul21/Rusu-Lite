@@ -16,7 +16,7 @@ def movie():
     movie_p.resizable(False, False)
     
     def callback(url):
-    webbrowser.open_new(url)
+        webbrowser.open_new(url)
 
     root = Tk()
     link1 = Label(movie_p, text="Google Hyperlink", fg="blue", cursor="hand2")
