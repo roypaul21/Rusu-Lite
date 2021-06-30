@@ -18,7 +18,6 @@ def movie():
     def callback(url):
         webbrowser.open_new(url)
 
-    root = Tk()
     link1 = Label(movie_p, text="Google Hyperlink", fg="blue", cursor="hand2")
     link1.place(x=100, y=100)
     link1.bind("<Button-1>", lambda e: callback("http://www.google.com"))
