@@ -697,3 +697,69 @@ def mp():
         back.place(x=5, y=5)
 
         root2.mainloop()
+              
+    def search():
+
+        style = ttk.Style()
+        style.theme_use('clam')
+
+        my_canvas = Canvas(main_p, width=300, height=400)
+        my_canvas.pack(pady=(170,5), fill=X)
+
+        no_lbl = Label(my_canvas, text="No Movie Exist Yet", bg="black", font=('helvetica', 13), fg="white")
+        no_lbl.place(x=40, y=50)
+
+
+        style.configure("Horizontal.TScrollbar", gripcount=0,
+                        background="orange", darkcolor="black", lightcolor="black",
+                        troughcolor="black", bordercolor="black", arrowcolor="black")
+
+        my_scrollbar = ttk.Scrollbar(my_canvas, orient='horizontal')
+        my_scrollbar.place(x=23, y=350, width=1320)
+        my_scrollbar.config(command=my_canvas.xview)
+
+        my_canvas.configure(xscrollcommand=my_scrollbar.set)
+        my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all"), bg="black",
+                                                                    highlightbackground="black"))
+
+        second_frame = Frame(my_canvas, bg="black")
+
+        my_canvas.create_window(0, 300, window=second_frame, anchor="sw")
+
+
+
+
+        my_cursor = mydb.cursor()
+
+        my_cursor.execute(
+            "SELECT gallery.movie_title, image.image_name FROM gallery INNER JOIN image ON image.image_id = gallery.gallery_id")
+        id = my_cursor.fetchall()
+
+        ent = search_entry.get()
+
+        y = str(ent)
+        x = y.title()
+
+        movie_buttons = list(range(len(id)))
+        movie_images = list(range(len(id)))
+
+        for count, i in enumerate(id):
+            img_nms= i[1]
+            if x in i[0]:
+                movie_images[count] = ImageTk.PhotoImage(Image.open(str(img_nms)))
+
+                movie_buttons[count] = Button(second_frame, image=movie_images[count], bg="black",
+                                              borderwidth=0,
+                                              activebackground="black", command=lambda i=i: movie(i))
+                movie_buttons[count].grid(row=0, column=count, pady=(40, 30), padx=(30))
+
+        def des():
+            my_canvas.destroy()
+            my_scrollbar.destroy()
+
+        b = ImageTk.PhotoImage(Image.open('back.png'))
+        back_btn = Button(my_canvas, image=b, compound=CENTER, bg="black", borderwidth=0
+                           , activebackground="black", command=des)
+        back_btn.place(x=32, y=0)
+
+        main_p.mainloop()
