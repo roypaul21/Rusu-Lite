@@ -763,3 +763,69 @@ def mp():
         back_btn.place(x=32, y=0)
 
         main_p.mainloop()
+
+       #specific search function
+    def specific_search():
+
+        frame2 = Frame(main_p, width=400, height=300, bg="black")
+        frame2.place(x=960,y=-20)
+
+        def search_genre_frm():
+            frame3 = Frame(main_p, width=400, height=300, bg="black")
+            frame3.place(x=960, y=-20)
+
+            def genre_filt():
+                global genress
+                style = ttk.Style()
+                style.theme_use('clam')
+
+                my_canvas = Canvas(main_p, width=300, height=400)
+                my_canvas.pack(pady=(170, 5), fill=X)
+
+                no_lbl = Label(my_canvas, text="No Movie Exist Yet", bg="black", font=('helvetica', 13), fg="white")
+                no_lbl.place(x=40, y=50)
+
+                style.configure("Horizontal.TScrollbar", gripcount=0,
+                                background="orange", darkcolor="black", lightcolor="black",
+                                troughcolor="black", bordercolor="black", arrowcolor="black")
+
+                my_scrollbar = ttk.Scrollbar(main_p, orient=HORIZONTAL, command=my_canvas.xview)
+                my_scrollbar.place(x=23, y=520, width=1320)
+
+                my_canvas.configure(xscrollcommand=my_scrollbar.set)
+                my_canvas.bind('<Configure>',
+                               lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all"), bg="black",
+                                                             highlightbackground="black"))
+
+                second_frame = Frame(my_canvas, bg="black")
+
+                my_canvas.create_window(0, 300, window=second_frame, anchor="sw")
+
+                my_cursor = mydb.cursor()
+                my_cursor.execute("""SELECT  genre.genre_name1,genre.genre_name2,genre.genre_name3, image.image_name FROM gallery 
+                                                      INNER JOIN genre ON genre.genre_id = gallery.gallery_id
+                                                      INNER JOIN image ON image.image_id = gallery.gallery_id""")
+                idd = my_cursor.fetchall()
+
+
+                movie_buttons = list(range(len(idd)))
+                movie_images = list(range(len(idd)))
+
+                g1 = genres1.get()
+                g2 = genres2.get()
+                g3 = genres3.get()
+
+                for count, i in enumerate(idd):
+                    img_nms = i[3]
+                    if g1 in i[0] or g1 in i[1] or g1 in i[2]:
+
+                        if g2 in i[0] or g2 in i[1] or g2 in i[2]:
+
+                            if g3 in i[0] or g3 in i[1] or g3 in i[2]:
+
+                                movie_images[count] = ImageTk.PhotoImage(Image.open(str(img_nms)))
+
+                                movie_buttons[count] = Button(second_frame, image=movie_images[count], bg="black",
+                                                              borderwidth=0,
+                                                              activebackground="black", command=lambda i=i: movie(i))
+                                movie_buttons[count].grid(row=0, column=count, pady=(40, 30), padx=(30))
