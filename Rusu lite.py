@@ -841,3 +841,25 @@ def mp():
                 frame2.destroy()
                 frame3.destroy()
                 frame3.mainloop()          
+              
+            #Genre Entry
+            lbl_g1 = Label(frame3, text="Genre 1", bg="black", fg="white")
+            lbl_g1.place(x=50, y=130)
+            genres1 = ttk.Combobox(frame3, width=10)
+            genres1.set("")
+            genres1['values'] = ("Horror", "Action", "Romance", "SciFi", "Fantasy", "Animated", "Mystery", "Comedy", "Adventure", "Thriller", "Drama")
+            genres1.place(x=50, y=155)
+
+            lbl_g2 = Label(frame3, text="Genre 2", bg="black", fg="white")
+            lbl_g2.place(x=170, y=130)
+            genres2 = ttk.Combobox(frame3, width=10)
+            genres2.set("")
+            genres2['values'] = ("Horror", "Action", "Romance", "SciFi", "Fantasy", "Animated", "Mystery", "Comedy", "Adventure", "Thriller", "Drama")
+            genres2.place(x=170, y=155)
+
+            lbl_g3 = Label(frame3, text="Genre 3", bg="black", fg="white")
+            lbl_g3.place(x=285, y=130)
+            genres3 = ttk.Combobox(frame3, width=10)
+            genres3.set("")
+            genres3['values'] = ("Horror", "Action", "Romance", "SciFi", "Fantasy", "Animated", "Mystery", "Comedy", "Adventure", "Thriller", "Drama")
+            genres3.place(x=285, y=155)
