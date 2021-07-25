@@ -863,3 +863,17 @@ def mp():
             genres3.set("")
             genres3['values'] = ("Horror", "Action", "Romance", "SciFi", "Fantasy", "Animated", "Mystery", "Comedy", "Adventure", "Thriller", "Drama")
             genres3.place(x=285, y=155)
+       
+            def des9():
+                if genres1.get() == "" and genres2.get() == "" and genres3.get() == "":
+                    return messagebox.showwarning("SEARCH FILTER ERROR", "Select at least one Genre filter to search")
+                else:
+                    genre_filt()
+            sgf = Button(frame3, text="Search", bg="orange", command=des9)
+            sgf.place(x=182, y=90)
+
+            b = ImageTk.PhotoImage(Image.open('back.png'))
+            back = Button(frame3, image=b, compound=CENTER, bg="black", borderwidth=0
+                              , activebackground="black", command=frame3.destroy)
+            back.place(x=5, y=50)
+            main_p.mainloop()
