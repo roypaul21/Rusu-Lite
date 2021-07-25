@@ -829,3 +829,15 @@ def mp():
                                                               borderwidth=0,
                                                               activebackground="black", command=lambda i=i: movie(i))
                                 movie_buttons[count].grid(row=0, column=count, pady=(40, 30), padx=(30))
+                def des():
+                    my_canvas.destroy()
+                    my_scrollbar.destroy()
+
+                b = ImageTk.PhotoImage(Image.open('back.png'))
+                back_btn2 = Button(my_canvas, image=b, compound=CENTER, bg="black", borderwidth=0
+                              , activebackground="black", command=des)
+                back_btn2.place(x=32, y=0)
+
+                frame2.destroy()
+                frame3.destroy()
+                frame3.mainloop()          
