@@ -950,3 +950,162 @@ def mp():
 
             frame2.destroy()
             main_p.mainloop()  
+       
+        lbl_yrs= Label(frame2,text="Year", bg="black",fg="white")
+        lbl_yrs.place(x=30, y=110)
+        my_cursor = mydb.cursor()
+        my_cursor.execute("""SELECT year FROM movie""")
+        yrd = my_cursor.fetchall()
+        yr_n = (list(OrderedDict.fromkeys(yrd)))
+        yr = ttk.Combobox(frame2, width=20)
+        yr.set("")
+        yr['values'] = (yr_n)
+        yr.place(x=30, y=130)
+
+
+        lbl_act = Label(frame2, text="Actor", bg="black", fg="white")
+        lbl_act.place(x=230, y=45)
+        my_cursor.execute("""SELECT name FROM actor""")
+        act = my_cursor.fetchall()
+        my_cursor.execute("""SELECT name2 FROM actor""")
+        act2 = my_cursor.fetchall()
+        act_n = (list(itertools.chain.from_iterable(OrderedDict.fromkeys(act + act2))))
+        actor = ttk.Combobox(frame2, width=20)
+        actor.set("")
+        actor['values'] = (act_n)
+        actor.place(x=230, y=65)
+
+        lbl_direct = Label(frame2, text="Director", bg="black", fg="white")
+        lbl_direct.place(x=30, y=45)
+        my_cursor.execute("""SELECT name FROM director""")
+        director1 = my_cursor.fetchall()
+        my_cursor.execute("""SELECT name2 FROM director""")
+        director2 = my_cursor.fetchall()
+        director_n =(list(itertools.chain.from_iterable(OrderedDict.fromkeys(director2 + director1))))
+        director = ttk.Combobox(frame2, width=20)
+        director.set("")
+        director['values'] = (director_n)
+        director.place(x=30, y=65)
+
+        lbl_cons = Label(frame2, text="Country", bg="black", fg="white")
+        lbl_cons.place(x=230, y=110)
+        my_cursor.execute("""SELECT country FROM movie""")
+        co = my_cursor.fetchall()
+        con = (list(itertools.chain.from_iterable(OrderedDict.fromkeys(co))))
+        country = ttk.Combobox(frame2, width=20)
+        country.set("")
+        country['values'] = (con)
+        country.place(x=230, y=130)
+
+
+        def des4():
+            if yr.get() == "" and country.get() == "" and actor.get() == "" and director.get() == "":
+                return messagebox.showwarning("SEARCH FILTER ERROR","Select at least one filter to search")
+            else:
+                search_spec()
+
+
+
+        search_btn = Button(frame2, bg="orange",text="Search", borderwidth=5, activebackground="black", command=des4)
+        search_btn.place(x=180, y=200)
+
+        search_genre= Button(frame2, bg="orange", text="GENRE FILTER", borderwidth=2, activebackground="black", command=search_genre_frm)
+        search_genre.place(x=250, y=200)
+
+        b = ImageTk.PhotoImage(Image.open('back.png'))
+        back = Button(frame2, image=b, compound=CENTER, bg="black", borderwidth=0
+                      , activebackground="black", command=frame2.destroy)
+        back.place(x=182, y=245)
+
+        main_p.mainloop()
+
+
+    # Entry search box
+    search_entry = Entry(main_p, width=40, bg='light goldenrod', font=("helvitica",18))
+    search_entry.place(x=420, y=180)
+
+    ms = ImageTk.PhotoImage(Image.open('minisearch.png'))
+    ms_lbl = Label(main_p, image=ms, bg="black")
+    ms_lbl.place(x=365, y=174)
+
+    # rusu lite logo image
+    rusu = ImageTk.PhotoImage(Image.open('miming.png'))
+    rusu_logo = Label(main_p, image=rusu, bg="black")
+    rusu_logo.place(x=635, y=5)
+
+    def des5(event):
+        if search_entry.get() == "":
+            return messagebox.showwarning("SEARCH WARNING","Search by typing a word or phrase in the search box at the top of this page ")
+        else:
+            search()
+
+
+    # search button
+    s = ImageTk.PhotoImage(Image.open('searchbtn.png'))
+    search_btn = Button(main_p, image=s, compound=CENTER, bg="black", borderwidth=0
+                        , activebackground="black", command=des5)
+    search_btn.bind('<return>', des5)
+    search_btn.place(x=643, y=220)
+
+
+    #add movie page button
+    addm = ImageTk.PhotoImage(Image.open('addmovie.png'))
+    add_movie_btn = Button(main_p, image=addm, bg="black",compound=CENTER, command=add_movie, borderwidth=0)
+    add_movie_btn.place(x=1260,y=10)
+
+    #Specific Search
+    fil_movie_btn = Button(main_p, text="Search Filter", bg="orange",borderwidth=5, command=specific_search)
+    fil_movie_btn.place(x=950, y=180)
+
+    def des6():
+        if messagebox.askyesno("EXIT INFORMATION","ARE YOU SURE LEAVING ME? (T.T)") == False:
+            return
+        else:
+            main_p.destroy()
+
+    exitm = ImageTk.PhotoImage(Image.open('exit.png'))
+    exit = Button(main_p, image=exitm, bg="black", command=des6, borderwidth=0)
+    exit.place(x=15, y=15)
+
+    #movie main page movie
+    frame1 = Frame(main_p, width=860, height=300,bg="black", highlightbackground="black")
+    frame1.place(x=266, y=300)
+
+    my_canvas = Canvas(frame1)
+    my_canvas.place(x=-43, y=40, width=900)
+
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all"), bg="black",highlightbackground="black" ))
+
+    second_frame = Frame(my_canvas, bg="black", borderwidth=0)
+
+
+    my_canvas.create_window(0, 100, window=second_frame, anchor="se")
+
+    my_cursor = mydb.cursor()
+
+    my_cursor.execute("SELECT image_name FROM image")
+    id = my_cursor.fetchall()
+
+   # def m(i):
+        #movie(i)
+
+    movie_buttons = list(range(len(id)))
+    movie_images = list(range(len(id)))
+
+    for count, i in enumerate(id):
+        img_nms = i[0]
+        #print(count, i[0])
+        movie_images[count] = ImageTk.PhotoImage(Image.open(str(img_nms)))
+
+        movie_buttons[count] = Button(second_frame, image=movie_images[count], bg="black", borderwidth=0,
+                                      activebackground="black", command=lambda i=i: movie(i))
+        movie_buttons[count].grid(row=0, column=count, pady=(40, 30), padx=(30))
+
+    main_p.mainloop()
+
+def des():
+    start_p.destroy()
+
+start_p.after(5000, lambda :(des(), mp()))
+
+start_p.mainloop()
