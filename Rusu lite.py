@@ -405,20 +405,23 @@ def mp():
             my_cursor.execute(sql6, (value6,))
             mydb.commit()
 
-            # Insert value into movie table
-            descrip = description_text.get("1.0", "end-1c")
-            sql4 = "INSERT INTO movie (title,link,year,country,description)" "VALUES (%s, %s, %s, %s, %s)"
-            value4 = (title.get(), link.get(), year_entry.get(), country_entry.get(), descrip)
-            my_cursor.execute(sql4, value4)
-            mydb.commit()
-
             # Insert value into genre table
-
-
             value7 =genre1.get(),genre2.get(),genre3.get()
             query7 = "INSERT INTO genre (genre_name1,genre_name2,genre_name3) VALUES (%s,%s,%s)"
             my_cursor.executemany(query7, (value7,))
             mydb.commit()
+              
+            # Insert value into movie table
+            my_cursor.execute("SELECT genre_id FROM genre")
+            gen_i = my_cursor.fetchall()
+            for ga in gen_i:
+                genre_ids = ga[0]
+
+            descrip = description_text.get("1.0", "end-1c")
+            sql4 = "INSERT INTO movie (title,link,year,country,description,genre_id)" "VALUES (%s, %s, %s, %s, %s, %s)"
+            value4 = (title.get(), link.get(), year_entry.get(), country_entry.get(), descrip, genre_ids)
+            my_cursor.execute(sql4, value4)
+            mydb.commit() 
 
             gall()
 
