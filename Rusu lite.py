@@ -374,56 +374,7 @@ def mp():
         def reg_movie():
             
             def gall():
-                '''     
-                my_cursor = mydb.cursor()
-                # insert all value to Gallery table
-                my_cursor.execute("SELECT gallery_id FROM gallery")
-                gal_i = my_cursor.fetchall()
-                for ga in gal_i:
-                    gal = ga[0]
-                mydb.commit()
-                # insert all value to actor_Gallery table
-                my_cursor.execute("SELECT actors_id FROM actor")
-                actor_i = my_cursor.fetchall()
-                for ac in actor_i:
-                    ida = ac[0]
-                mydb.commit()
-                sql_ac = "INSERT INTO actor_gallery(gallery_id,actors_id)" "VALUES (%s, %s)"
-                value_ac = (gal,ida)
-                my_cursor.execute(sql_ac, value_ac)
-                mydb.commit()
-                # insert all value to director_Gallery table
-                my_cursor.execute("SELECT directors_id FROM director")
-                director_i = my_cursor.fetchall()
-                for di in director_i:
-                    idd = di[0]
-                mydb.commit()
-                sql_dd = "INSERT INTO director_gallery(gallery_id,directors_id)" "VALUES (%s, %s)"
-                value_dd = (gal, idd)
-                my_cursor.execute(sql_dd, value_dd)
-                mydb.commit()
-                # insert all value to movie_Gallery table
-                my_cursor.execute("SELECT movie_id FROM movie")
-                movie_i = my_cursor.fetchall()
-                for mo in movie_i:
-                    idm = mo[0]
-                mydb.commit()
-                sql_m = "INSERT INTO movie_gallery(gallery_id,movie_id)" "VALUES (%s, %s)"
-                value_m = (gal, idm)
-                my_cursor.execute(sql_m, value_m)
-                mydb.commit()
-                # insert all value to image_Gallery table
-                my_cursor.execute("SELECT image_id FROM image")
-                image_i = my_cursor.fetchall()
-                for im in image_i:
-                    idi = im[0]
-                mydb.commit()
-                sql_im = "INSERT INTO image_gallery(gallery_id,image_id)" "VALUES (%s, %s)"
-                value_im = (gal, idi)
-                my_cursor.execute(sql_im, value_im)
-                mydb.commit()
-                messagebox.showinfo("MOVIE REGISTRATION FORM","FILM SUCCESSFULLY REGISTER")
-                '''
+                messagebox.showinfo("MOVIE REGISTRATION FORM","FILM SUCCESSFULLY REGISTER")                
                 root2.destroy()
                 mp()
             
@@ -715,7 +666,7 @@ def mp():
                         troughcolor="black", bordercolor="black", arrowcolor="black")
 
         my_scrollbar = ttk.Scrollbar(my_canvas, orient='horizontal')
-        my_scrollbar.place(x=23, y=350, width=1320)
+        my_scrollbar.pack(pady=(400, 5), fill=X)
         my_scrollbar.config(command=my_canvas.xview)
 
         my_canvas.configure(xscrollcommand=my_scrollbar.set)
@@ -789,9 +740,8 @@ def mp():
                                 background="orange", darkcolor="black", lightcolor="black",
                                 troughcolor="black", bordercolor="black", arrowcolor="black")
 
-                my_scrollbar = ttk.Scrollbar(main_p, orient=HORIZONTAL, command=my_canvas.xview)
-                my_scrollbar.place(x=23, y=520, width=1320)
-
+                my_scrollbar = ttk.Scrollbar(my_canvas, orient='horizontal')
+                my_scrollbar.pack(pady=(400, 5), fill=X)
                 my_canvas.configure(xscrollcommand=my_scrollbar.set)
                 my_canvas.bind('<Configure>',
                                lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all"), bg="black",
@@ -893,8 +843,8 @@ def mp():
                             background="orange", darkcolor="black", lightcolor="black",
                             troughcolor="black", bordercolor="black", arrowcolor="black")
 
-            my_scrollbar = ttk.Scrollbar(main_p, orient=HORIZONTAL, command=my_canvas.xview)
-            my_scrollbar.place(x=23, y=520, width=1320)
+            my_scrollbar = ttk.Scrollbar(my_canvas, orient='horizontal')
+            my_scrollbar.pack(pady=(400, 5), fill=X)
 
             my_canvas.configure(xscrollcommand=my_scrollbar.set)
             my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all"), bg="black",
