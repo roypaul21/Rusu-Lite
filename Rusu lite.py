@@ -178,7 +178,7 @@ def mp():
                 frame_act.destroy()
 
             b = ImageTk.PhotoImage(
-                Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite Reborn/images buttons/back.bmp.png'))
+                Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite /images buttons/back.bmp.png'))
             return_btnn = Button(frame_act, image=b, compound=CENTER, bg="black", borderwidth=0
                                  , activebackground="black", command=des7)
             return_btnn.place(x=10, y=10)
@@ -257,7 +257,7 @@ def mp():
                 frame_dct.destroy()
 
             b = ImageTk.PhotoImage(
-                Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite Reborn/images buttons/back.bmp.png'))
+                Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite/images buttons/back.bmp.png'))
             return_btnn = Button(frame_dct, image=b, compound=CENTER, bg="black", borderwidth=0
                                  , activebackground="black", command=des7)
             return_btnn.place(x=10, y=10)
@@ -323,7 +323,7 @@ def mp():
 
         def des7():
             frame5.destroy()
-        b = ImageTk.PhotoImage(Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite Reborn/images buttons/back.bmp.png'))
+        b = ImageTk.PhotoImage(Image.open('C:/Users/LENOVO/PycharmProjects/Rusu lite/images buttons/back.bmp.png'))
         return_btnn = Button(frame5, image=b, compound=CENTER, bg="black", borderwidth=0
                              , activebackground="black", command=des7)
         return_btnn.place(x=10, y=10)
@@ -942,17 +942,17 @@ def mp():
         lbl1.place(x=580, y=220)
 
         adda= ImageTk.PhotoImage(
-            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite Reborn/images buttons/addactor.png'))
+            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite/images buttons/addactor.png'))
         add_actor_btn = Button(mr, image=adda, bg="black", compound=CENTER, borderwidth=0, command=add_actor)
         add_actor_btn.place(x=300, y=450)
 
         addd = ImageTk.PhotoImage(
-            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite Reborn/images buttons/adddirector.png'))
+            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite/images buttons/adddirector.png'))
         add_director_btn = Button(mr, image=addd, bg="black", compound=CENTER, borderwidth=0, command=add_director)
         add_director_btn.place(x=550, y=450)
 
         addg = ImageTk.PhotoImage(
-            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite Reborn/images buttons/addgenre.png'))
+            Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite/images buttons/addgenre.png'))
         add_genre_btn = Button(mr, image=addg, bg="black", compound=CENTER, borderwidth=0, command=add_genre)
         add_genre_btn.place(x=800, y=450)
 
@@ -1316,7 +1316,7 @@ def mp():
     search_btn.place(x=643, y=220)
 
     # add movie page button
-    addm = ImageTk.PhotoImage(Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite Reborn/images buttons/registerbtn.png'))
+    addm = ImageTk.PhotoImage(Image.open('C:/Users/LENOVO/PycharmProjects/Rusu Lite/images buttons/registerbtn.png'))
     add_movie_btn = Button(main_p, image=addm, bg="black", compound=CENTER, borderwidth=0,  command=regs_movie)
     add_movie_btn.place(x=1150, y=10)
 
